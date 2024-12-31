@@ -1,0 +1,15 @@
+{
+  "name": "com.needrun.unity-game-utils",
+  "version": "0.0.1",
+  "displayName": "Needrun Unity Game Utils",
+  "description": "A collection of utility scripts for Unity game development.",
+  "unity": "2021.3",
+  "author": {
+    "name": "kok202",
+    "email": "kok202@naver.com",
+    "url": "https://github.com/needrun"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  }
+}
