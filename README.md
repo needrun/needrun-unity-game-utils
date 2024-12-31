@@ -32,8 +32,8 @@
 - HashUtils
 - GameObjectUtils
 - 리소스를 불러올 때
-  - PrefabsLoader
-  - SpritesLoader
+  - PrefabLoader
+  - SpriteLoader
   - FileLoader
 - 모바일 플랫폼
   - AndroidHelper
@@ -46,9 +46,10 @@
 
 ## MonoBehaviour
 
-- - ActiveSyncWith
-  - ButtonDelegator
-  - PositionXYFollower
+- ActiveSyncWith
+- ButtonDelegator
+- PositionXYFollower
+- ViewModelMonoBehaviour
 - 네트워크 환경을 주기적으로 체크
   - NetworkChecker
 - 모바일 기기 대응
