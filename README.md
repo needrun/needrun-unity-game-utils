@@ -64,11 +64,6 @@
 - 사용자 언어에 따라 이미지나 텍스트를 달리 보여주고 싶을 때
   - LocaleImage
   - LocaleText
-- ScreenCaptureManager
-  - `[Required]`
-  - ScreenCaptureAtAndroid
-  - ScreenCaptureAtIos
-  - ScreenCaptureAtEditor
 
 ## SingletonMonoBehaviour
 
@@ -78,11 +73,3 @@ GameObject에 다음과 같은 컴포넌트를 넣어 기능을 활성화 할 �
 - UnityMainThreadDispatcher
 - DisplayOrHideManager
 - DateChangeMonitoring
-- MobileNotification
-  - `[Required]`
-  - AndroidMobileNotification : MonoBehaviour
-  - IosMobileNotification : MonoBehaviour
-- StoreReview
-  - [Required]
-  - AndroidStoreReview : MonoBehaviour
-  - IosMobileNotification : MonoBehaviour
