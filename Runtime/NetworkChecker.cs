@@ -4,8 +4,10 @@ using UnityEngine.Events;
 
 namespace NeedrunGameUtils
 {
+    // 싱글톤
     public class NetworkChecker : MonoBehaviour
     {
+        public static NetworkChecker instance;
         private const float checkInterval = 5f;
         private const float restoreCheckInterval = 1f;
         public readonly UnityEvent disconnected = new UnityEvent();
@@ -13,6 +15,17 @@ namespace NeedrunGameUtils
 
         private void Awake()
         {
+            // 코루틴 실행 동작이 Awake에 있어야 하는 동작이라 부득이하게 SingletonMonoBehaviour를 사용하지 않고 직접 싱글톤을 구현
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
+            }
+
             StartCoroutine(MonitoringNetworkStatus());
         }
 
