@@ -8,6 +8,7 @@ namespace NeedrunGameUtils
     public class NetworkChecker : MonoBehaviour
     {
         public static NetworkChecker instance;
+        public static UnityEvent<NetworkChecker> instanceAssigned = new UnityEvent<NetworkChecker>();
         private const float checkInterval = 5f;
         private const float restoreCheckInterval = 1f;
         public readonly UnityEvent disconnected = new UnityEvent();
@@ -19,6 +20,7 @@ namespace NeedrunGameUtils
             if (instance == null)
             {
                 instance = this;
+                instanceAssigned.Invoke(instance);
                 DontDestroyOnLoad(gameObject);
             }
             else if (instance != this)
