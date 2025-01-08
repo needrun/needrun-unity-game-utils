@@ -29,5 +29,9 @@ namespace NeedrunGameUtils
             return Math.Min(Math.Max(x, min), max);
         }
 
+        public static float SafeDivide(float x, float y, float defaultValue = 0)
+        {
+            return y == 0 ? defaultValue : x / y;
+        }
     }
 }
