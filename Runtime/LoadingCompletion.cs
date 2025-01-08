@@ -7,7 +7,7 @@ namespace NeedrunGameUtils
     {
         private bool loadedAtOnce = false;
         private TaskCompletionSource<bool> completion = new TaskCompletionSource<bool>(false);
-        public Task loadingTask
+        public Task task
         {
             get
             {
