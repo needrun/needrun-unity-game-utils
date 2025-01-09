@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public class EditorOnly : MonoBehaviour
+namespace NeedrunGameUtils
 {
-    private void Awake()
+    public class EditorOnly : MonoBehaviour
     {
-        if (Application.isEditor == false)
+        private void Awake()
         {
-            this.gameObject.SetActive(false);
+            if (Application.isEditor == false)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
-    }
 
-    private void OnEnable()
-    {
-        if (Application.isEditor == false)
+        private void OnEnable()
         {
-            this.gameObject.SetActive(false);
+            if (Application.isEditor == false)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }
