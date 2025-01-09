@@ -6,7 +6,7 @@ namespace NeedrunGameUtils
     public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : SingletonMonoBehaviour<T>
     {
         public static T instance;
-        public static UnityEvent<T> instanceAssigned = new UnityEvent<T>();
+        private static UnityEvent<T> instanceAssigned = new UnityEvent<T>();
         protected virtual void Awake()
         {
             if (instance == null)
@@ -19,6 +19,15 @@ namespace NeedrunGameUtils
             {
                 Destroy(gameObject);
             }
+        }
+
+        public static void AddInstanceAssignedListener(UnityAction<T> action)
+        {
+            if (instance != null)
+            {
+                action(instance);
+            }
+            instanceAssigned.AddListener(action);
         }
     }
 }
