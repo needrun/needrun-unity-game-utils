@@ -31,7 +31,7 @@ namespace NeedrunGameUtils
             StartCoroutine(MonitoringNetworkStatus());
         }
 
-        public static void AddInstanceAssignedListener(UnityAction<NetworkChecker> action)
+        public static void AfterInstanceAssigned(UnityAction<NetworkChecker> action)
         {
             if (instance != null)
             {

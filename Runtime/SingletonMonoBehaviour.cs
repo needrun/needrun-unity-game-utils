@@ -21,7 +21,7 @@ namespace NeedrunGameUtils
             }
         }
 
-        public static void AddInstanceAssignedListener(UnityAction<T> action)
+        public static void AfterInstanceAssigned(UnityAction<T> action)
         {
             if (instance != null)
             {
