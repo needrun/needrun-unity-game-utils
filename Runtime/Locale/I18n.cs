@@ -20,9 +20,17 @@ namespace NeedrunGameUtils
         private static Locale? locale = null;
         private static readonly UnityEvent localeChangedEvent = new UnityEvent();
 
-        static I18n()
+        public static void Load(string[] filenames)
         {
-            List<LocaleElement> allLocaleElement = JsonLoader.GetByFileName<List<LocaleElement>>("Locales.json");
+            foreach (string filename in filenames)
+            {
+                Load(filename);
+            }
+        }
+
+        public static void Load(string filename)
+        {
+            List<LocaleElement> allLocaleElement = JsonLoader.GetByFileName<List<LocaleElement>>(filename);
             foreach (LocaleElement localeElement in allLocaleElement)
             {
                 if (!locales.ContainsKey(localeElement.key))
