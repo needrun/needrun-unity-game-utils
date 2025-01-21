@@ -109,6 +109,15 @@ namespace NeedrunGameUtils
             return default(T);
         }
 
+        public static T Pick<T>(List<T> list, T defaultValue)
+        {
+            if (list.Count == 0)
+            {
+                return defaultValue;
+            }
+            return list[Next(list.Count)];
+        }
+
         public static HashSet<int> Pick(int max, int pickCount)
         {
             return Pick(0, max, pickCount);
