@@ -67,7 +67,7 @@ namespace NeedrunGameUtils
                 onChanged.Invoke();
             }
 
-            if (copiedChangedPropertyNames.Count == 0)
+            if (copiedChangedPropertyNames.Count != 0)
             {
                 foreach (string propertyName in copiedChangedPropertyNames)
                 {
