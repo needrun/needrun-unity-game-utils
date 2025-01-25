@@ -9,7 +9,10 @@ namespace NeedrunGameUtils
 
         void Start()
         {
-            this.Delay(lifetime).OnComplete(() => Destroy(gameObject));
+            this.StartCoroutine(
+                DelayUtils.Delay(lifetime)
+                    .OnComplete(() => Destroy(gameObject))
+                    .Execute());
         }
     }
 }

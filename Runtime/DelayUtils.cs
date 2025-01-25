@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace NeedrunGameUtils
 {
-    public static class MonoBehaviourTimeExtension
+    public class DelayUtils
     {
-        public static DelayTask Delay(this MonoBehaviour monoBehaviour, float delaySeconds)
+        public static DelayTask Delay(float delaySeconds)
         {
             DelayTask delayTask = new DelayTask(delaySeconds);
-            monoBehaviour.StartCoroutine(delayTask.Execute());
             return delayTask;
         }
 
