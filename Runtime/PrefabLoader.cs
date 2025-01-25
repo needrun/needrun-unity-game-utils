@@ -20,7 +20,7 @@ namespace NeedrunGameUtils
                 return prefabsCache[pathname];
             }
             // 한번도 불러온적이 없다면 pathname을 key로 갖는 맵에 캐시로 기록해둡니다.
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + pathname);
+            GameObject prefab = Resources.Load<GameObject>(pathname);
             prefabsCache.Add(pathname, prefab);
             return prefab;
         }
