@@ -129,6 +129,11 @@ namespace NeedrunGameUtils
         public static string CreateLeftTimer(DateTimeOffset from, DateTimeOffset to, string format, TimeSpan maxTimeSpan)
         {
             TimeSpan difference = to - from;
+            return CreateLeftTimer(difference, format, maxTimeSpan);
+        }
+
+        public static string CreateLeftTimer(TimeSpan difference, string format, TimeSpan maxTimeSpan)
+        {
             // 최대값이 설정 값을 초과하지 않도록 설정
             if (difference > maxTimeSpan)
                 difference = maxTimeSpan;
