@@ -10,6 +10,11 @@ namespace NeedrunGameUtils
         private static TimeZoneInfo koreaTimeZone = TimeZoneInfo.CreateCustomTimeZone("UTC+09:00", TimeSpan.FromHours(9), "UTC+09:00", "UTC+09:00");
         private static string[] ntpServers = new string[] { "time.windows.com", "time.google.com" };
 
+        public static void RegisterNtpServer(string[] ntpServers)
+        {
+            NetworkTimer.ntpServers = ntpServers;
+        }
+
         public static DateTimeOffset GetNetworkDateTimeOffset()
         {
             foreach (string ntpServer in ntpServers)
