@@ -1,5 +1,6 @@
 
 using System;
+using Codice.Client.Common;
 
 namespace NeedrunGameUtils
 {
@@ -12,6 +13,14 @@ namespace NeedrunGameUtils
         public static readonly string MMSS = @"mm\:ss";
         public static readonly string MSS = @"m\:ss";
         public static DateTimeOffset cachedNetworkDateTimeOffset = DateTimeOffset.MinValue;
+        private static TimeSpan ntpConfidenceLevel = TimeSpan.FromDays(3);
+        private static Func<DateTimeOffset> ntpFailCallback = null;
+
+        public static void Config(TimeUtilsConfig timeUtilsConfig)
+        {
+            TimeUtils.ntpConfidenceLevel = timeUtilsConfig.ntpConfidenceLevel;
+            TimeUtils.ntpFailCallback = timeUtilsConfig.ntpFailCallback;
+        }
 
         public static DateTimeOffset Parse(string iso8601String)
         {
@@ -116,14 +125,24 @@ namespace NeedrunGameUtils
             }
             {
                 // 차이가 있다면 네트워크 시간을 리프레시
-                cachedNetworkDateTimeOffset = NetworkTimer.GetNetworkDateTimeOffset();
+                cachedNetworkDateTimeOffset = GetNetworkDateTimeOffset();
                 return cachedNetworkDateTimeOffset;
             }
         }
 
         public static DateTimeOffset GetNetworkDateTimeOffset()
         {
-            return NetworkTimer.GetNetworkDateTimeOffset(); ;
+            DateTimeOffset localNow = DateTimeOffset.Now;
+            DateTimeOffset ntpNow = NetworkTimer.GetNetworkDateTimeOffset();
+            TimeSpan timeDifference = localNow - ntpNow;
+            if (timeDifference > ntpConfidenceLevel || timeDifference < -ntpConfidenceLevel)
+            {
+                if (ntpFailCallback != null)
+                {
+                    return ntpFailCallback();
+                }
+            }
+            return ntpNow;
         }
 
         public static string CreateLeftTimer(DateTimeOffset from, DateTimeOffset to, string format, TimeSpan maxTimeSpan)

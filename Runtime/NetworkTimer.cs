@@ -5,6 +5,8 @@ using System.Net.Sockets;
 
 namespace NeedrunGameUtils
 {
+    // NTP 통신으로 시간값을 불러옵니다.
+    // 주의: NTP 프로토콜은 UDP 통신이라서, 패킷이 뒤섞여 값이 정확하지 않을 수 있습니다.
     public class NetworkTimer
     {
         private static TimeZoneInfo koreaTimeZone = TimeZoneInfo.CreateCustomTimeZone("UTC+09:00", TimeSpan.FromHours(9), "UTC+09:00", "UTC+09:00");
