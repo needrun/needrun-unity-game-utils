@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace NeedrunGameUtils
             ShowIfEnumAttribute showIf = (ShowIfEnumAttribute)attribute;
             SerializedProperty enumProperty = GetEnumProperty(property, showIf.enumField);
 
-            if (enumProperty != null && enumProperty.enumValueIndex == showIf.enumValue)
+            if (enumProperty != null && showIf.enumValues != null && showIf.enumValues.Contains(enumProperty.enumValueIndex))
             {
                 EditorGUI.PropertyField(position, property, label, true);
             }
@@ -22,7 +23,7 @@ namespace NeedrunGameUtils
             ShowIfEnumAttribute showIf = (ShowIfEnumAttribute)attribute;
             SerializedProperty enumProperty = GetEnumProperty(property, showIf.enumField);
 
-            if (enumProperty != null && enumProperty.enumValueIndex == showIf.enumValue)
+            if (enumProperty != null && showIf.enumValues != null && showIf.enumValues.Contains(enumProperty.enumValueIndex))
             {
                 return EditorGUI.GetPropertyHeight(property, label, true);
             }

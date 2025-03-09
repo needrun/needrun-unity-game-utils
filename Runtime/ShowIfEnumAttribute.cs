@@ -5,12 +5,12 @@ namespace NeedrunGameUtils
     public class ShowIfEnumAttribute : PropertyAttribute
     {
         public string enumField;
-        public int enumValue;
+        public int[] enumValues = new int[0];
 
-        public ShowIfEnumAttribute(string enumField, int enumValue)
+        public ShowIfEnumAttribute(string enumField, params int[] enumValues)
         {
             this.enumField = enumField;
-            this.enumValue = enumValue;
+            this.enumValues = enumValues;
         }
     }
 }
