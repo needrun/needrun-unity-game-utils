@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NeedrunGameUtils
@@ -28,7 +29,7 @@ namespace NeedrunGameUtils
             return new TaskCompletionSource<bool>(false);
         }
 
-        public static async Task WaitUntil(Func<bool> condition, int checkInterval = 100, int timeout = -1)
+        public static async Task WaitUntil(Func<bool> condition, int checkInterval = 100, int timeout = -1, CancellationTokenSource cancellationTokenSource = null)
         {
             if (condition == null)
                 throw new ArgumentNullException(nameof(condition));
@@ -37,9 +38,16 @@ namespace NeedrunGameUtils
 
             while (!condition())
             {
+                if (cancellationTokenSource != null && cancellationTokenSource.Token.IsCancellationRequested)
+                    throw new OperationCanceledException("Task was canceled.");
+
                 if (timeout > 0 && (DateTime.Now - startTime).TotalMilliseconds > timeout)
                     throw new TimeoutException("The condition was not met within the specified timeout.");
-                await Task.Delay(checkInterval);
+
+                if (cancellationTokenSource != null)
+                    await Task.Delay(checkInterval, cancellationTokenSource.Token);
+                else
+                    await Task.Delay(checkInterval);
             }
         }
     }
