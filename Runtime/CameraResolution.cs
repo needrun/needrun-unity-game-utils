@@ -8,10 +8,13 @@ namespace NeedrunGameUtils
     {
         private float scaleWidthRatio = 16f;
         private float scaleHeightRatio = 9f;
+        [SerializeField]
+        [Tooltip("Using camera instead of Camera.main, If null, using Camera.main")]
+        private Camera targetCamera;
 
         private void Awake()
         {
-            Camera camera = GetComponent<Camera>();
+            Camera camera = this.targetCamera == null ? Camera.main : this.targetCamera;
             float screenWidth = Screen.width;
             float screenHeight = Screen.height;
             float scaleHeight = (screenWidth / screenHeight) / (scaleWidthRatio / scaleHeightRatio);
