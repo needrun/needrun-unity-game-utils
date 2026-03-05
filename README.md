@@ -1,5 +1,63 @@
 # Needrun unity game utils
 
+## 사용법
+
+일부 static 클래스의 경우 다음과 같이 static 생성자를 사용해서 초기화할 수 있습니다.
+
+```csharp
+using System;
+using NeedrunGameUtils;
+using UnityEngine.Events;
+
+public class RootStore : Singleton<RootStore>
+{
+    public readonly UnityEvent playerDataChangedEvent = new UnityEvent();
+
+    static RootStore()
+    {
+        // Needrun Game Utils의 설정부
+        TimeUtils.Config(new TimeUtilsConfig
+        {
+            ntpConfidenceLevel = TimeSpan.FromDays(3.0),
+            ntpFailCallback = () => ServiceLocator.instance.networkTimeFromServer.GetOrLocal()
+        });
+        NetworkTimer.RegisterNtpServer(new string[] {
+            "time.windows.com",
+            "time.google.com"
+        });
+        I18n.Load(new string[]{
+            "Locales/IAPLocales.json",
+            "Locales/SystemLocales.json",
+            "Locales/TitleLocales.json",
+            "Locales/IngredientLocales.json",
+            "Locales/RecipeLocales.json",
+            "Locales/BakingLocales.json",
+            "Locales/FamiliarLocales.json",
+            "Locales/SettingsLocales.json",
+            "Locales/RemoteResources.json",
+        });
+    }
+
+    private RootStore()
+    {
+    }
+}
+```
+
+또는
+
+```csharp
+public class NeedrunGameUtilConfig : SingletonMonoBehaviour<NeedrunGameUtilConfig>
+{
+    // Script Execution Order을 최소값(-10000)으로 설정하여, 기본 스크립트 이전에 실행되도록 함
+    protected override void Awake()
+    {
+        base.Awake();
+        // 이하 설정 부분은 동문
+    }
+}
+```
+
 ## Dependency
 
 - "com.unity.nuget.newtonsoft-json": "3.2.1"

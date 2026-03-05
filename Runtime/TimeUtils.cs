@@ -38,12 +38,12 @@ namespace NeedrunGameUtils
 
         public static string FormatYYYYMMDD(DateTimeOffset dateTimeOffset)
         {
-            return dateTimeOffset.ToString("yyyy-MM-dd");
+            return dateTimeOffset.ToString("yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public static string FormatYYMMDD(DateTimeOffset dateTimeOffset)
         {
-            return dateTimeOffset.ToString("yyMMdd");
+            return dateTimeOffset.ToString("yyMMdd", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public static string Format(DateTimeOffset dateTimeOffset)
@@ -177,7 +177,7 @@ namespace NeedrunGameUtils
 
             public static string Format(DateTimeOffset dateTimeOffset)
             {
-                return dateTimeOffset.ToString("yyyy-MM-dd HH:mm:sszzz");
+                return dateTimeOffset.ToString("yyyy-MM-dd HH:mm:sszzz", System.Globalization.CultureInfo.InvariantCulture);
             }
         }
     }

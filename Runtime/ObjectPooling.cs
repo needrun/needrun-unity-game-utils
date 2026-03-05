@@ -26,14 +26,15 @@ namespace NeedrunGameUtils
         [SerializeField]
         [ShowIfEnum("poolMode", (int)PoolMode.LAZY)]
         private int poolSize = 200;
+
         // ========================================================================================== PoolMode.MANUAL_FROM_PARENT
         [SerializeField]
         [ShowIfEnum("poolMode", (int)PoolMode.MANUAL_FROM_PARENT)]
         private GameObject instancesFromParent;
-        // ==========================================================================================
 
+        // ========================================================================================== PoolMode.MANUAL
         [SerializeField]
-        [Header("[ === 아래는 Manual Mode일 때만 사용 === ]")]
+        [ShowIfEnum("poolMode", (int)PoolMode.MANUAL)]
         private List<GameObject> instances = new List<GameObject>();
         private List<GameObject> usableInstance = new List<GameObject>();
         public List<GameObject> usedInstance
