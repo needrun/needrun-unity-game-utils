@@ -15,7 +15,7 @@ public class RootStore : Singleton<RootStore>
 
     static RootStore()
     {
-        // Needrun Game Utils의 설정부
+        // Needrun Game Utils configuration
         TimeUtils.Config(new TimeUtilsConfig
         {
             ntpConfidenceLevel = TimeSpan.FromDays(3.0),
@@ -40,6 +40,18 @@ public class RootStore : Singleton<RootStore>
 
     private RootStore()
     {
+        SetInvariantCulture();
+    }
+
+    // Recommended: Set global culture to InvariantCulture to ensure data consistency
+    private void SetInvariantCulture()
+    {
+        var invariantCulture = System.Globalization.CultureInfo.InvariantCulture;
+        System.Threading.Thread.CurrentThread.CurrentCulture = invariantCulture;
+        System.Threading.Thread.CurrentThread.CurrentUICulture = invariantCulture;
+        System.Globalization.CultureInfo.DefaultThreadCurrentCulture = invariantCulture;
+        System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = invariantCulture;
+        Debug.Log("[RootStore] Global culture set to InvariantCulture for data consistency");
     }
 }
 ```
@@ -49,11 +61,11 @@ public class RootStore : Singleton<RootStore>
 ```csharp
 public class NeedrunGameUtilConfig : SingletonMonoBehaviour<NeedrunGameUtilConfig>
 {
-    // Script Execution Order을 최소값(-10000)으로 설정하여, 기본 스크립트 이전에 실행되도록 함
+    // Set Script Execution Order to minimum value (-10000) to execute before other scripts
     protected override void Awake()
     {
         base.Awake();
-        // 이하 설정 부분은 동문
+        // The following configuration is the same as above
     }
 }
 ```

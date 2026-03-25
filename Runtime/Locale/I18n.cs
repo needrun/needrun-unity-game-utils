@@ -83,10 +83,10 @@ namespace NeedrunGameUtils
             if (!I18n.locales.ContainsKey(key) || !I18n.locales[key].ContainsKey(GetCurrentLocale().GetLocaleCode()))
             {
                 Debug.LogWarning("Can not find (" + key + ") at locale data");
-                return string.Format(key, parameters);
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture, key, parameters);
             }
             string source = I18n.locales[key][GetCurrentLocale().GetLocaleCode()];
-            return string.Format(source, parameters);
+            return string.Format(System.Globalization.CultureInfo.InvariantCulture, source, parameters);
         }
 
         public static string GetValue(string key, string defaultValue)

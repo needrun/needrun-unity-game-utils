@@ -34,7 +34,6 @@ namespace NeedrunGameUtils
 
         // ========================================================================================== PoolMode.MANUAL
         [SerializeField]
-        [ShowIfEnum("poolMode", (int)PoolMode.MANUAL)]
         private List<GameObject> instances = new List<GameObject>();
         private List<GameObject> usableInstance = new List<GameObject>();
         public List<GameObject> usedInstance
