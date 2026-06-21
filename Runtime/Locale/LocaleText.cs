@@ -13,6 +13,12 @@ namespace NeedrunGameUtils
 
         private void Awake()
         {
+            if (!this.enabled)
+            {
+                return;
+            }
+
+
             this.text = GetComponent<Text>();
             if (text != null)
             {
@@ -32,6 +38,11 @@ namespace NeedrunGameUtils
 
         private void OnDestroy()
         {
+            if (!this.enabled)
+            {
+                return;
+            }
+
             I18n.RemoveListener(ChangeText);
         }
 
